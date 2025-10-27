@@ -36,6 +36,7 @@ class _HelpSupportState extends State<HelpSupport> {
   bool _enableBtn = false;
   bool isLoading = false;
   var token = "";
+  var user_id = "";
 
   @override
   void initState() {
@@ -43,6 +44,13 @@ class _HelpSupportState extends State<HelpSupport> {
     SharedPreference.getString(AppConstants.loginToken).then((v){
       setState(() {
         token = v;
+      });
+    });
+
+
+    SharedPreference.getString(AppConstants.userId).then((v){
+      setState(() {
+        user_id = v;
       });
     });
   }
@@ -359,9 +367,10 @@ class _HelpSupportState extends State<HelpSupport> {
         "email": emailController.text,
         "phone": phoneController.text,
         "message": messageController.text,
+        "user_id":user_id.toString()
       };
 
-      HttpService.postWithHeader(BaseUrl.helpSupport, data, token)
+      HttpService.postWithHeader(BaseUrl.helpSupport, data, 'Bearer '+token)
           .then((response) {
         setState(() {
           Map<String, dynamic> responseJson = json.decode(response.body);
