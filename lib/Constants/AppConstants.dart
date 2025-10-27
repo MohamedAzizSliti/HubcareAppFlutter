@@ -3,6 +3,7 @@ class AppConstants {
   static const String loginToken = "loginToken";
   static const String token ='';
   static const String isLogin = "isLogin";
+  static const String country_code = "countrycode";
   static const String userId = "userId";
   static const String weight = "kg";
   static const String dimension = "cm"; // AIzaSyDp-3fClPdctRB1zrxsdkN9GFc6gRPdnH8

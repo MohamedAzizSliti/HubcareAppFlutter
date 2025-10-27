@@ -28,6 +28,7 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
 
   String phone = '';
+  String country_code = '';
   String profile = '';
   String name = '';
   String email = '';
@@ -45,6 +46,10 @@ class _ProfileTabState extends State<ProfileTab> {
         token = value;
         isLoading = true;
         getProfile();
+      });
+    });    SharedPreference.getString(AppConstants.country_code).then((value) {
+      setState(() {
+         country_code =value;
       });
     });
     super.initState();
@@ -65,6 +70,8 @@ class _ProfileTabState extends State<ProfileTab> {
           name = responseJson['user']['name'] ?? "";
           email = responseJson['user']['email'] ?? "";
           profile = responseJson['user']['profile_image'] ?? "";
+          country_code = responseJson['user']['country_code'] ?? "";
+
         } else {
           Fluttertoast.showToast(
             msg: responseJson['message'],
@@ -180,6 +187,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                   ],
                                 ),
                                 Text(
+                                  country_code +
                                  phone,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(

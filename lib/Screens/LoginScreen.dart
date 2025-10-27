@@ -35,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   var uniqueDeviceId = "";
   var deviceType = "";
   var deviceToken = "1";
+  String country_code = "";
 
   final GoogleSignIn googleSignIn = GoogleSignIn(
     scopes: ["profile", "email"],
@@ -170,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     counterText: "",
                                     contentPadding: const EdgeInsets.all(7),
                                   ),
-                                  initialCountryCode: 'IN',
+                                  initialCountryCode: 'QA',
                                   validator: (value) {
                                     if (value == null || value.number.isEmpty) {
                                       return 'Please enter a phone number';
@@ -182,6 +183,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   },
                                   onChanged: (phone) {
                                     setState(() {
+
+                                      country_code= phone.countryCode.toString();
                                       print(phone.completeNumber);
                                     });
                                   },
