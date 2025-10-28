@@ -37,6 +37,40 @@ class _HelpSupportState extends State<HelpSupport> {
   bool isLoading = false;
   var token = "";
   var user_id = "";
+  getProfile() {
+    var url = BaseUrl.getProfile;
+    debugPrint('Token $token');
+    HttpService.getDataWithHeader(url, token).then((response) {
+      setState(() {
+        // ignore: avoid_print
+        debugPrint(response.body.toString());
+        Map<String, dynamic> responseJson = json.decode(response.body);
+        isLoading = false;
+        if (responseJson['status'] == true) {
+          user_id = responseJson['user']['id'] ?? "";
+          print("USER ID IN HELP->  "+ user_id);
+          SharedPreference.putString(AppConstants.userId, user_id+"");
+          SharedPreference.getString(AppConstants.userId).then((v){
+            setState(() {
+              user_id = v;
+            });
+          });
+
+
+        } else {
+          Fluttertoast.showToast(
+              msg: responseJson['message'],
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: AppColors.themeColor,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      });
+
+    });
+  }
 
   @override
   void initState() {
@@ -44,15 +78,12 @@ class _HelpSupportState extends State<HelpSupport> {
     SharedPreference.getString(AppConstants.loginToken).then((v){
       setState(() {
         token = v;
+        getProfile();
       });
     });
 
 
-    SharedPreference.getString(AppConstants.userId).then((v){
-      setState(() {
-        user_id = v;
-      });
-    });
+
   }
 
 
