@@ -1,2 +1,0 @@
-/Users/apple/Documents/GitHub/Hubcare/android/app/.cxx/RelWithDebInfo/464m581n/x86/CMakeFiles/edit_cache.dir
-/Users/apple/Documents/GitHub/Hubcare/android/app/.cxx/RelWithDebInfo/464m581n/x86/CMakeFiles/rebuild_cache.dir
